@@ -34,7 +34,7 @@ function App() {
       <main>
         <aside className='sideBar'>
           <div>
-            <OptionBox name='Select Font' extraCode={
+            <OptionBox name='Select Font'>
               <select value={bannerStyles.textFont} onChange={(event) => setBannerStyle({
                 ...bannerStyles,
                 textFont: event.target.value
@@ -46,16 +46,16 @@ function App() {
                   ))
                 }
               </select>
-            }/>
+            </OptionBox>
 
-            <OptionBox name='Select Color' extraCode={
+            <OptionBox name='Select Color'>
               <input type='color' value={bannerStyles.backgroundColor} onChange={(event) => setBannerStyle({
                 ...bannerStyles,
                 backgroundColor: event.target.value
               })}></input>
-            } />
+            </OptionBox>
 
-            <OptionBox name='Your text' extraCode={
+            <OptionBox name='Your text'>
               <input type='text'
               placeholder={bannerStyles.textContent}
               onChange={(event) => setBannerStyle({
@@ -63,8 +63,7 @@ function App() {
                 textContent: event.target.value
               })}
               ></input>
-            }/>
-          
+            </OptionBox>
           </div>
           
         </aside>
