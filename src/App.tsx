@@ -8,11 +8,21 @@ const avaiableFonts: string[] = [
   'Monospace'
 ]
 
+const avaiableFontSizes: number[] = [
+  10,
+  12,
+  16,
+  20,
+  24,
+  30
+]
+
 function App() {
 
   const [bannerStyles, setBannerStyle] = useState({
     backgroundColor: 'red',
     textFont: 'Arial',
+    textFontSize: 16,
     textContent: 'Your Text here'
   })
   
@@ -64,6 +74,22 @@ function App() {
               })}
               ></input>
             </OptionBox>
+
+            <OptionBox name='Select Font Size'>
+              <select value={bannerStyles.textFontSize} onChange={(event) => setBannerStyle({
+                ...bannerStyles,
+                textFontSize: Number(event.target.value)
+              })}>
+
+                {
+                  avaiableFontSizes.map((item, index) => (
+                    <option value={item} key={index}>{item}</option> // TALVEZ MUDE ALGO QUANDO FOR SELECIONAR ELE
+                  ))
+                }
+              </select>
+              
+            </OptionBox>
+
           </div>
           
         </aside>
@@ -72,7 +98,8 @@ function App() {
           <section 
           className='banner'
           style={{
-            backgroundColor: `${bannerStyles.backgroundColor}`
+            backgroundColor: bannerStyles.backgroundColor,
+            fontSize: bannerStyles.textFontSize
           }}
           >
             <h1 style={{
