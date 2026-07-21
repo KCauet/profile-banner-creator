@@ -1,0 +1,29 @@
+.mainBox {
+    background-color: grey;
+    height: 70px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.subMainBox {
+    background-color: aqua;
+    height: 80%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.area {
+    background-color: darkgray;
+    border: 1px solid;
+}
+
+.area:hover {
+    cursor: pointer;
+    background-color: green;
+    border: 2px solid;
+}

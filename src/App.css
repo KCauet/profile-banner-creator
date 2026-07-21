@@ -16,13 +16,18 @@ header div {
   /*justify-content: space-around;*/
 }
 
+input[type='checkbox'],
+input[type='color'],
+select {
+  cursor: pointer;
+}
+
 .optionsSection {
   display: flex;
   gap: 40px;
 }
 
 main {
-  background-color: turquoise;
   height: 95vh;
   display: grid;
   grid-template-columns: 20% 80%;
@@ -31,28 +36,25 @@ main {
 .sideBar {
   background-color: white;
   border-right: 1px solid grey;
-  display: flex;
-  justify-content: center;
   padding-top: 30px;
 }
 
 .sideBar div {
-  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Trabalho mal feito detectado, atrapalhou no dev da caixa do alignment */
   gap: 20px;
 }
 
 .mainDiv {
-  background-color: antiquewhite;
+  background-color: darkgray;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .banner {
-  width: 85%;
-  height: 60%;
+  width: calc(1920px / 3);
+  height: calc(1080px / 3);
   border: 2px solid;
   display: flex;
   align-items: center;

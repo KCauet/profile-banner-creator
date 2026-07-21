@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 import OptionBox from './components/OptionBox/OptionBox'
+import AlignmentMiniPreview from './components/AlignmentMiniPreview/AlignmentMiniPreview'
 
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
 function App() {
+
+  // The textAlignment here is representing the [justify-content, align-items] properties
 
   const [bannerStyles, setBannerStyle] = useState({
     backgroundColor: 'white',
@@ -13,6 +16,7 @@ function App() {
     textFontSize: 24,
     textContent: 'Your Text here',
     textColor: 'black',
+    textAlignment: ['start', 'center'],
     BoldText: false,
     ItalicText: false
   })
@@ -22,7 +26,8 @@ function App() {
     color: bannerStyles.textColor,
     fontSize: bannerStyles.textFontSize,
     fontWeight: bannerStyles.BoldText ? "Bold" : 'normal',
-    fontStyle: bannerStyles.ItalicText ? "italic" : 'normal'
+    fontStyle: bannerStyles.ItalicText ? "italic" : 'normal',
+    textAlign: bannerStyles.textAlignment
   }
   
   return (
@@ -34,7 +39,7 @@ function App() {
           </section>
           
           <section className='optionsSection'>
-            /* usaremos isso em breve */
+            {/* usaremos isso em breve */}
           </section>
           
         </div>
@@ -100,6 +105,10 @@ function App() {
                   ))
                 }
               </select>
+
+              <h2>Select Text Alignment</h2>
+              <AlignmentMiniPreview />
+
             </OptionBox>
             
             <hr />
