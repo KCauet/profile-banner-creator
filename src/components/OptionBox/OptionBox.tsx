@@ -2,7 +2,7 @@ import styles from './OptionBox.module.css' // Feito assim pra garantir exclusiv
 
 interface properties {
     name: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 function OptionBox(props: properties) {
@@ -12,8 +12,6 @@ function OptionBox(props: properties) {
             <div className={styles.mainBox}>
                 <div>
                     <h2 className={styles.text}>{props.name}</h2>
-                </div>
-                <div>
                     {props.children}
                 </div>
             </div>

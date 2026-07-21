@@ -1,10 +1,8 @@
 .text {
-    color: white;
+    color: black;
 }
 
 .mainBox {
-    background-color: blue;
-    border: 1px solid;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -12,7 +10,6 @@
 }
 
 .mainBox div {
-    border: 1px solid; /* temporary */
     text-align: center;
     align-items: center;
 }
