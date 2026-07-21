@@ -1,8 +1,22 @@
 # Banner Studio
 
-Aqui lhe apresento um dos meus projetos que será incluído no meu portifólio
+Aqui lhe apresento um dos meus projetos que será incluído no meu portifólio, feito com as tecnologias abaixo
 
-Atualmente ele contém as seguintes funcionalidades:
+## Tecnologias usadas
+
+- Typescript
+
+- React
+
+- CSS Modules
+
+## Site Hospedado
+
+- Em breve ;)
+
+## Funcionalidades
+
+- Atualmente ele contém as seguintes funcionalidades:
 
 v0.1
 
