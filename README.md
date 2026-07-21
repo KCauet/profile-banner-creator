@@ -18,7 +18,7 @@ Aqui lhe apresento um dos meus projetos que será incluído no meu portifólio, 
 
 - Atualmente ele contém as seguintes funcionalidades:
 
-v0.1
+## v0.1
 
 -- Editar fonte
 
@@ -28,7 +28,7 @@ v0.1
 
 -- Editar tamanho da fonte
 
-v0.2 - adições futuras
+## v0.2 - adições futuras
 
 -- Escolher tamanho e tipo de banner (youtube, instagram, linkedin etc...)
 
