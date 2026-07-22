@@ -1,6 +1,6 @@
 import styles from './Banner.module.css'
 
-import type { BannerElements } from '../../App'
+import type { BannerElements } from '../../types/BannerTypes'
 import BannerElement from './BannerElement'
 
 export interface properties {

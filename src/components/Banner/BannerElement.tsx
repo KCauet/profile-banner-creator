@@ -1,4 +1,4 @@
-import type {TextElement, RectangleElement } from "../../App"
+import type {TextElement, RectangleElement } from "../../types/BannerTypes"
 
 
 interface Elements {
@@ -10,13 +10,12 @@ function BannerElement({elementProps}: Elements) {
     function RederizeCorrectElement() {
         switch(elementProps.type) {
             case 'text':
-                return <h1 key={elementProps.id}>{elementProps.text}</h1>
+                return <h1 key={elementProps.id} style={elementProps.styles}>{elementProps.text}</h1>
             case 'rectangle':
                 return <section key={elementProps.id} style={elementProps.styles}></section>
         }
     }
     
-
     return (
         <section>
             { RederizeCorrectElement() }

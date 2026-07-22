@@ -8,36 +8,7 @@ import Banner from './components/Banner/Banner'
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
-export type BannerElements = TextElement | RectangleElement
-
-export interface BaseElement {
-  id: number;
-  type: 'text' | 'rectangle';
-  x: number;
-  y: number;
-  selected: boolean
-}
-
-export interface TextElement extends BaseElement {
-  type: 'text';
-  text: string;
-  styles: {
-    color: string;
-    fontStyle: string;
-    fontWeight: string;
-    fontSize: number;
-  }
-}
-
-export interface RectangleElement extends BaseElement {
-  type: 'rectangle';
-  styles: {
-    width: number;
-    height: number;
-    backgroundColor: string;
-    border: string;
-  }
-}
+import type { BannerElements, BaseElement } from './types/BannerTypes'
 
 function App() {
 
@@ -65,7 +36,7 @@ function App() {
       x: 10,
       y: 10,
       styles: {
-        color: 'white',
+        color: 'black',
         fontStyle: 'normal',
         fontWeight: 'normal',
         fontSize: 24
@@ -88,7 +59,6 @@ function App() {
 
   function addComponent(type: BaseElement['type']) {
     const templateElement = createComponentTemplate(type, 1)
-    
     setElements([...bannerElements, templateElement])
   }
 
