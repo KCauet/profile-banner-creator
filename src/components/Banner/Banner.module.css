@@ -2,7 +2,6 @@
   width: calc(1920px / 3); /* Simulating a banner for a computer resolution, changeable later */
   height: calc(1080px / 3);
   border: 2px solid;
-  display: flex;
-  align-items: center;
+  display: absolute;
   padding: 20px;
 }

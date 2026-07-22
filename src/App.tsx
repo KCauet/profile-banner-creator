@@ -8,17 +8,38 @@ import Banner from './components/Banner/Banner'
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
+type BannerElement = TextElement | RectangleElement
+
+interface BaseElement {
+  id: number;
+  type: 'text' | 'rectangle' | 'image';
+  x: number;
+  y: number;
+}
+
+interface TextElement extends BaseElement {
+  type: 'text';
+  text: string;
+  color: string;
+  fontStyle: string;
+  fontWeight: string;
+  fontSize: number;
+}
+
+interface RectangleElement extends BaseElement {
+  type: 'rectangle';
+  backgroundColor: 'grey';
+  borderColor: 'black';
+}
+
 function App() {
 
-  // The textAlignment here is representing the [justify-content, align-items] properties
-
   const [bannerStyles, setBannerStyle] = useState({
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     textFont: 'Arial',
     textFontSize: 24,
     textContent: 'Your Text here',
-    textColor: 'black',
-    textAlignment: ['start', 'center'],
+    textColor: '#000000',
     BoldText: false,
     ItalicText: false
   })
@@ -30,6 +51,31 @@ function App() {
     fontWeight: bannerStyles.BoldText ? "Bold" : 'normal',
     fontStyle: bannerStyles.ItalicText ? "italic" : 'normal'
   }
+
+  const [bannerElements, setElements] = useState<BannerElement[]>([
+    {
+      id: 0,
+      type: 'text',
+      text: 'youtube',
+      x: 10,
+      y: 10,
+      color: 'white',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: 24
+    },
+    {
+      id: 0,
+      type: 'text',
+      text: 'you',
+      x: 10,
+      y: 10,
+      color: 'white',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: 24
+    }
+  ])
   
   return (
     <>
@@ -136,7 +182,16 @@ function App() {
         </aside>
         <div className='mainDiv'>
           
-          <Banner mainStyles={bannerStyles} textStyles={bannerTextStyles} />
+          <Banner mainStyles={bannerStyles} textStyles={bannerTextStyles}>
+            {bannerElements.map((element, index) => {
+              switch(element.type) {
+                case "text":
+                  return <h1 key={index}>{element.text}</h1>
+                case "rectangle":
+                  return <div key={index} style={{width: '50px', height: '50px'}} ></div>
+              }
+            })}
+          </Banner>
 
         </div>
       </main>

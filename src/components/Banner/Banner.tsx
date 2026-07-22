@@ -1,3 +1,4 @@
+import { Children } from 'react'
 import styles from './Banner.module.css'
 
 
@@ -17,7 +18,8 @@ interface properties {
         fontSize: number,
         fontWeight: string,
         fontStyle: string,
-    }
+    },
+    children?: React.ReactNode
 }
 
 function Banner(props: properties) {
@@ -29,7 +31,8 @@ function Banner(props: properties) {
                 backgroundColor: props.mainStyles.backgroundColor
             }}
             >
-            <h1 style={props.mainStyles}>{props.mainStyles.textContent}</h1>
+            <h1 style={props.textStyles}>{props.mainStyles.textContent}</h1>
+            <div>{props.children}</div>
           </section>
         </>
     )
