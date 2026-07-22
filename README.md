@@ -30,13 +30,17 @@ Aqui lhe apresento um dos meus projetos que será incluído no meu portifólio, 
 
 ## v0.2 -- Atual
 
--- Escolher tamanho e tipo de banner (youtube, instagram, linkedin etc...)
-
 -- Edições mais avançadas pro texto e mais opções de fontes
 
 -- Melhor estilização do site e nome do projeto renomeado para Banner Studio
 
+-- Novo sistema pra suportar adicionar novos elementos (WIP)
+
+-- Poder selecionar e modificar propriedades do elemento selecionado (WIP)
+
 ## v0.3 - Adições Futuras
+
+-- Escolher tamanho e tipo de banner (youtube, instagram, linkedin etc...)
 
 -- Upload de imagens para o banner (Plano de fundo ou Componente no banner)
 
