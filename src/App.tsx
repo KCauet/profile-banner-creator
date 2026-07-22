@@ -41,23 +41,20 @@ export interface RectangleElement extends BaseElement {
 
 function App() {
 
-  const [bannerStyles, setBannerStyle] = useState({
+  const [curBannerStyles, setCurBannerStyle] = useState({
     backgroundColor: '#ffffff',
-    textFont: 'Arial',
-    textFontSize: 24,
-    textContent: 'Your Text here',
-    textColor: '#000000',
     BoldText: false,
     ItalicText: false
   })
 
-  const bannerTextStyles = {
-    fontFamily: bannerStyles.textFont,
-    color: bannerStyles.textColor,
-    fontSize: bannerStyles.textFontSize,
-    fontWeight: bannerStyles.BoldText ? "Bold" : 'normal',
-    fontStyle: bannerStyles.ItalicText ? "italic" : 'normal'
-  }
+  const [curTextStyles, setCurTextStyles] = useState({
+    textContent: 'Your Text here',
+    fontFamily: 'Arial',
+    color: '#000000',
+    fontSize: 24,
+    fontWeight: curBannerStyles.BoldText ? "Bold" : 'normal',
+    fontStyle: curBannerStyles.ItalicText ? "italic" : 'normal'
+  })
 
   const [bannerElements, setElements] = useState<BannerElements[]>([
     {
@@ -141,12 +138,10 @@ function App() {
           <section className='optionsSection'>
 
             <OptionBox name='Add components'>
-              <select name="Components">
 
-                <option onClick={() => addComponent('text')}>Text</option>
-                <option onClick={() => addComponent('rectangle')}>Rectangle</option>
+              <button onClick={() => addComponent('text')}>Text</button>
+              <button onClick={() => addComponent('rectangle')}>Rectangle</button>
 
-              </select>
             </OptionBox>
 
           </section>
@@ -161,26 +156,26 @@ function App() {
 
               <h2>Your text</h2>
               <input type='text'
-              placeholder={bannerStyles.textContent}
-              onChange={(event) => setBannerStyle({
-                ...bannerStyles,
+              placeholder={curTextStyles.textContent}
+              onChange={(event) => setCurTextStyles({
+                ...curTextStyles,
                 textContent: event.target.value
               })}
               ></input>
 
               <div className='checkboxDiv' style={{display: 'flex', flexDirection: 'row'}}>
                 
-                <input type="checkbox" checked={bannerStyles.BoldText} onChange={(event) => (
-                  setBannerStyle({
-                    ...bannerStyles,
+                <input type="checkbox" checked={curBannerStyles.BoldText} onChange={(event) => (
+                  setCurBannerStyle({
+                    ...curBannerStyles,
                     BoldText: event.target.checked
                   })
                 )}/>
 
                 <label style={{fontWeight: 'bold'}}>Bold</label>
-                <input type="checkbox" checked={bannerStyles.ItalicText} onChange={(event) => (
-                  setBannerStyle({
-                    ...bannerStyles,
+                <input type="checkbox" checked={curBannerStyles.ItalicText} onChange={(event) => (
+                  setCurBannerStyle({
+                    ...curBannerStyles,
                     ItalicText: event.target.checked
                   })
                 )}/>
@@ -189,9 +184,9 @@ function App() {
 
 
               <h2>Select Font</h2>
-              <select value={bannerStyles.textFont} onChange={(event) => setBannerStyle({
-                ...bannerStyles,
-                textFont: event.target.value
+              <select value={curTextStyles.fontFamily} onChange={(event) => setCurTextStyles({
+                ...curTextStyles,
+                fontFamily: event.target.value
               })}>
 
                 {
@@ -203,9 +198,9 @@ function App() {
 
               
               <h2>Select Font Size</h2>
-              <select value={bannerStyles.textFontSize} onChange={(event) => setBannerStyle({
-                ...bannerStyles,
-                textFontSize: Number(event.target.value)
+              <select value={curTextStyles.fontSize} onChange={(event) => setCurTextStyles({
+                ...curTextStyles,
+                fontSize: Number(event.target.value)
               })}>
 
                 {
@@ -224,15 +219,15 @@ function App() {
 
             <OptionBox name='Color options'>
               <h2>Select Color</h2>
-              <input type='color' value={bannerStyles.backgroundColor} onChange={(event) => setBannerStyle({
-                ...bannerStyles,
+              <input type='color' value={curBannerStyles.backgroundColor} onChange={(event) => setCurBannerStyle({
+                ...curBannerStyles,
                 backgroundColor: event.target.value
               })}></input>
 
               <h2>Text Color</h2>
-              <input type='color' value={bannerStyles.textColor} onChange={(event) => setBannerStyle({
-                ...bannerStyles,
-                textColor: event.target.value
+              <input type='color' value={curTextStyles.color} onChange={(event) => setCurTextStyles({
+                ...curTextStyles,
+                color: event.target.value
               })}></input>
 
             </OptionBox>
@@ -245,8 +240,8 @@ function App() {
         <div className='mainDiv'>
           
           <Banner
-          mainStyles={bannerStyles}
-          textStyles={bannerTextStyles}
+          mainStyles={curBannerStyles}
+          textStyles={curTextStyles}
           elementsList={bannerElements}
           />
 

@@ -3,19 +3,16 @@ import styles from './Banner.module.css'
 import type { BannerElements } from '../../App'
 import BannerElement from './BannerElement'
 
-interface properties {
+export interface properties {
     mainStyles: {
         backgroundColor: string,
-        textFont: string,
-        textFontSize: number,
-        textContent: string,
-        textColor: string,
         BoldText: boolean,
         ItalicText: boolean
     },
     textStyles: {
         fontFamily: string,
         color: string,
+        textContent: string,
         fontSize: number,
         fontWeight: string,
         fontStyle: string,
@@ -29,7 +26,7 @@ function Banner({mainStyles, textStyles, elementsList}: properties) {
             <section
             className={styles.banner}
             style={{backgroundColor: mainStyles.backgroundColor}}>
-            <h1 style={textStyles}>{mainStyles.textContent}</h1>
+            <h1 style={textStyles}>{textStyles.textContent}</h1>
             {elementsList.map((element) => (
                 <BannerElement
                 key={element.id}
