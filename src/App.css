@@ -10,6 +10,11 @@ header {
   border-bottom: 1px solid grey;
 }
 
+h1 {
+  /* font-style: italic; */
+  /* font-weight: bold; */
+}
+
 header div {
   width: 100%;
   display: flex;

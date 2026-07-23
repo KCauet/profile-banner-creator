@@ -12,6 +12,7 @@ import type { BannerElements, BaseElement, TextElement } from './types/BannerTyp
 
 function App() {
 
+  // Morrendo devagarzin :>
   const [curBannerStyles, setCurBannerStyle] = useState({
     backgroundColor: '#ffffff',
     BoldText: false,
@@ -37,9 +38,10 @@ function App() {
       y: 10,
       styles: {
         color: 'black',
-        fontStyle: 'normal',
+        fontFamily: 'Arial',
         fontWeight: 'normal',
-        fontSize: 24
+        fontSize: 24,
+        fontStyle: 'normal'
       }
     },
     {
@@ -54,10 +56,25 @@ function App() {
         backgroundColor: 'red',
         border: '1px solid'
       }
+    },
+    {
+      id: 2,
+      selected: false,
+      type: 'text',
+      text: 'youtube',
+      x: 10,
+      y: 10,
+      styles: {
+        color: 'black',
+        fontFamily: 'Arial',
+        fontWeight: 'normal',
+        fontSize: 24,
+        fontStyle: 'normal'
+      }
     }
   ])
 
-  const [selectedId, setSelectedId] = useState<number | null>(1);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const selectedElement = bannerElements.find(element => element.id === selectedId)
 
   function addComponent(type: BaseElement['type']) {
@@ -77,9 +94,10 @@ function App() {
           y: 10,
           styles: {
             color: 'black',
-            fontStyle: 'normal',
-            fontWeight: 'normal',
-            fontSize: 24
+            fontFamily: 'normal',
+            fontWeight: 'bold',
+            fontSize: 24,
+            fontStyle: 'normal'
           }
           
         }
@@ -103,6 +121,8 @@ function App() {
   function selectComponent(id: number) {
     setSelectedId(id)
   }
+
+  // Funções pra atualizar o estado dos items (Feitos só os de texto e ainda tá uma bagunça :<)
 
   function updateText(changes: string) {
     const newList = bannerElements.map(element => {
@@ -144,6 +164,24 @@ function App() {
           ...element,
           styles: {
             ...element.styles,
+            fontFamily: changes
+          }
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
+  function updateItalicFont(changes: string) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          styles: {
+            ...element.styles,
             fontStyle: changes
           }
         }
@@ -154,6 +192,43 @@ function App() {
 
     setElements(newList)
   }
+
+  function updateFontSize(changes: number) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          styles: {
+            ...element.styles,
+            fontSize: changes
+          }
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
+  function updateBoldFont(changes: string) {
+    const newList = bannerElements.map(element => {
+      if (element.id === selectedId && element.type === 'text') {
+        return {
+          ...element,
+          styles: {
+            ...element.styles,
+            fontWeight: changes
+          }
+        }
+      }
+
+      return element
+    })
+
+    setElements(newList)
+  }
+
 
   return (
     <>
@@ -184,6 +259,7 @@ function App() {
 
               <h2>Your text</h2>
               <input type='text'
+              value={selectedElement?.type === 'text' ? selectedElement.text : ''}
               placeholder={selectedElement?.type === 'text' ? selectedElement.text : ''}
               onChange={(event) => {
                 updateText(event.target.value)
@@ -192,29 +268,36 @@ function App() {
 
               <div className='checkboxDiv' style={{display: 'flex', flexDirection: 'row'}}>
                 
-                <input type="checkbox" checked={curBannerStyles.BoldText} onChange={(event) => (
-                  setCurBannerStyle({
-                    ...curBannerStyles,
-                    BoldText: event.target.checked
-                  })
-                )}/>
-
+                <input type="checkbox"
+                // Aqui embaixo ele vai fazer uma verificação pra saber se é texto e tbm tem uma adaptação pra esse caso pq fontWeight é uma string e o checked só aceita boolean
+                checked={
+                  selectedElement?.type === 'text' &&
+                  selectedElement.styles.fontWeight === 'bold'
+                }
+                onChange={(event) => {
+                  updateBoldFont(event.target.checked ? 'bold' : 'normal')
+                }}/>
                 <label style={{fontWeight: 'bold'}}>Bold</label>
-                <input type="checkbox" checked={curBannerStyles.ItalicText} onChange={(event) => (
-                  setCurBannerStyle({
-                    ...curBannerStyles,
-                    ItalicText: event.target.checked
-                  })
-                )}/>
+
+                <input type="checkbox"
+                checked={
+                  selectedElement?.type === 'text' &&
+                  selectedElement.styles.fontStyle === 'italic'
+                }
+                onChange={(event) => {
+                  updateItalicFont(event.target.checked ? 'italic' : 'normal')
+                }}
+                />
                 <label style={{fontStyle: 'italic'}} >Italic</label>
               </div>
 
 
               <h2>Select Font</h2>
-              <select value={curTextStyles.fontFamily} onChange={(event) => setCurTextStyles({
-                ...curTextStyles,
-                fontFamily: event.target.value
-              })}>
+              <select 
+              value={selectedElement?.type === 'text' ? selectedElement.styles.fontFamily : 'Arial'}
+              onChange={(event) => {
+                updateFont(event.target.value)
+              }}>
 
                 {
                   avaiableFonts.map((item, index) => (
@@ -225,10 +308,9 @@ function App() {
 
               
               <h2>Select Font Size</h2>
-              <select value={curTextStyles.fontSize} onChange={(event) => setCurTextStyles({
-                ...curTextStyles,
-                fontSize: Number(event.target.value)
-              })}>
+              <select
+              value={selectedElement?.type === 'text' ? selectedElement.styles.fontSize : 24}
+              onChange={(event) => updateFontSize(Number(event.target.value))}>
 
                 {
                   avaiableFontSizes.map((item, index) => (
@@ -267,7 +349,6 @@ function App() {
           
           <Banner
           mainStyles={curBannerStyles}
-          textStyles={curTextStyles}
           elementsList={bannerElements}
           onSelect={selectComponent}
           />

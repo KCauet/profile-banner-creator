@@ -9,6 +9,7 @@ export interface properties {
         BoldText: boolean,
         ItalicText: boolean
     },
+    /*
     textStyles: {
         fontFamily: string,
         color: string,
@@ -17,11 +18,12 @@ export interface properties {
         fontWeight: string,
         fontStyle: string,
     },
+    */
     elementsList: BannerElements[],
     onSelect: (id: number) => void;
 }
 
-function Banner({mainStyles, textStyles, elementsList, onSelect}: properties) {
+function Banner({mainStyles, elementsList, onSelect}: properties) {
     return (
         <>
             <section

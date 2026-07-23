@@ -13,9 +13,10 @@ export interface TextElement extends BaseElement {
   text: string;
   styles: {
     color: string;
-    fontStyle: string;
+    fontFamily: string;
     fontWeight: string;
     fontSize: number;
+    fontStyle: string;
   }
 }
 
