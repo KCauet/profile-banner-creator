@@ -5,9 +5,7 @@ import BannerElement from './BannerElement'
 
 export interface properties {
     mainStyles: {
-        backgroundColor: string,
-        BoldText: boolean,
-        ItalicText: boolean
+        backgroundColor: string
     },
     /*
     textStyles: {

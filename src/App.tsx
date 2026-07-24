@@ -8,26 +8,16 @@ import Banner from './components/Banner/Banner'
 import { avaiableFonts } from './constants/fonts'
 import { avaiableFontSizes } from './constants/fontSizes'
 
-import type { BannerElements, BaseElement, TextElement } from './types/BannerTypes'
+import type { BannerElements, BaseElement } from './types/BannerTypes'
 
 function App() {
 
   // Morrendo devagarzin :>
-  const [curBannerStyles, setCurBannerStyle] = useState({
+  const [BannerStyles, setBannerStyle] = useState({
     backgroundColor: '#ffffff',
-    BoldText: false,
-    ItalicText: false
   })
 
-  const [curTextStyles, setCurTextStyles] = useState({
-    textContent: 'Your Text here',
-    fontFamily: 'Arial',
-    color: '#000000',
-    fontSize: 24,
-    fontWeight: curBannerStyles.BoldText ? "Bold" : 'normal',
-    fontStyle: curBannerStyles.ItalicText ? "italic" : 'normal'
-  })
-
+  // Elementos iniciais só pra Testes
   const [bannerElements, setElements] = useState<BannerElements[]>([
     {
       id: 0,
@@ -122,7 +112,7 @@ function App() {
     setSelectedId(id)
   }
 
-  // Funções pra atualizar o estado dos items (Feitos só os de texto e ainda tá uma bagunça :<)
+  // Refatorados >:) )
 
   function updateText(changes: string) {
     const newList = bannerElements.map(element => {
@@ -139,15 +129,16 @@ function App() {
     setElements(newList)
   }
 
-  function updateTextColor(changes: string) {
+  function updateTextStyles(property: string, changes: string | number) {
     const newList = bannerElements.map(element => {
       if (element.id === selectedId && element.type === 'text') {
         return {
           ...element,
           styles: {
             ...element.styles,
-            color: changes
+            [property]: changes
           }
+          
         }
       }
 
@@ -156,79 +147,6 @@ function App() {
 
     setElements(newList)
   }
-
-  function updateFont(changes: string) {
-    const newList = bannerElements.map(element => {
-      if (element.id === selectedId && element.type === 'text') {
-        return {
-          ...element,
-          styles: {
-            ...element.styles,
-            fontFamily: changes
-          }
-        }
-      }
-
-      return element
-    })
-
-    setElements(newList)
-  }
-
-  function updateItalicFont(changes: string) {
-    const newList = bannerElements.map(element => {
-      if (element.id === selectedId && element.type === 'text') {
-        return {
-          ...element,
-          styles: {
-            ...element.styles,
-            fontStyle: changes
-          }
-        }
-      }
-
-      return element
-    })
-
-    setElements(newList)
-  }
-
-  function updateFontSize(changes: number) {
-    const newList = bannerElements.map(element => {
-      if (element.id === selectedId && element.type === 'text') {
-        return {
-          ...element,
-          styles: {
-            ...element.styles,
-            fontSize: changes
-          }
-        }
-      }
-
-      return element
-    })
-
-    setElements(newList)
-  }
-
-  function updateBoldFont(changes: string) {
-    const newList = bannerElements.map(element => {
-      if (element.id === selectedId && element.type === 'text') {
-        return {
-          ...element,
-          styles: {
-            ...element.styles,
-            fontWeight: changes
-          }
-        }
-      }
-
-      return element
-    })
-
-    setElements(newList)
-  }
-
 
   return (
     <>
@@ -275,7 +193,7 @@ function App() {
                   selectedElement.styles.fontWeight === 'bold'
                 }
                 onChange={(event) => {
-                  updateBoldFont(event.target.checked ? 'bold' : 'normal')
+                  updateTextStyles('fontWeight',event.target.checked ? 'bold' : 'normal')
                 }}/>
                 <label style={{fontWeight: 'bold'}}>Bold</label>
 
@@ -285,7 +203,7 @@ function App() {
                   selectedElement.styles.fontStyle === 'italic'
                 }
                 onChange={(event) => {
-                  updateItalicFont(event.target.checked ? 'italic' : 'normal')
+                  updateTextStyles('fontStyle', event.target.checked ? 'italic' : 'normal')
                 }}
                 />
                 <label style={{fontStyle: 'italic'}} >Italic</label>
@@ -296,12 +214,12 @@ function App() {
               <select 
               value={selectedElement?.type === 'text' ? selectedElement.styles.fontFamily : 'Arial'}
               onChange={(event) => {
-                updateFont(event.target.value)
+                updateTextStyles('fontFamily', event.target.value)
               }}>
 
                 {
                   avaiableFonts.map((item, index) => (
-                    <option value={item} key={index}>{item}</option> // TALVEZ MUDE ALGO QUANDO FOR SELECIONAR ELE
+                    <option value={item} key={index}>{item}</option>
                   ))
                 }
               </select>
@@ -310,11 +228,11 @@ function App() {
               <h2>Select Font Size</h2>
               <select
               value={selectedElement?.type === 'text' ? selectedElement.styles.fontSize : 24}
-              onChange={(event) => updateFontSize(Number(event.target.value))}>
+              onChange={(event) => updateTextStyles('fontSize', Number(event.target.value))}>
 
                 {
                   avaiableFontSizes.map((item, index) => (
-                    <option value={item} key={index}>{item}</option> // TALVEZ MUDE ALGO QUANDO FOR SELECIONAR ELE
+                    <option value={item} key={index}>{item}</option>
                   ))
                 }
               </select>
@@ -328,13 +246,13 @@ function App() {
 
             <OptionBox name='Color options'>
               <h2>Select Color</h2>
-              <input type='color' value={curBannerStyles.backgroundColor} onChange={(event) => setCurBannerStyle({
-                ...curBannerStyles,
+              <input type='color' value={BannerStyles.backgroundColor} onChange={(event) => setBannerStyle({
+                ...BannerStyles,
                 backgroundColor: event.target.value
               })}></input>
 
               <h2>Text Color</h2>
-              <input type='color'  onChange={(event) => updateTextColor(event.target.value)}>
+              <input type='color'  onChange={(event) => updateTextStyles('color', event.target.value)}>
               
               </input>
 
@@ -348,7 +266,7 @@ function App() {
         <div className='mainDiv'>
           
           <Banner
-          mainStyles={curBannerStyles}
+          mainStyles={BannerStyles}
           elementsList={bannerElements}
           onSelect={selectComponent}
           />
